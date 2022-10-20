@@ -5,7 +5,7 @@ Mô hình: CNN + SVM
 
 ![image](https://user-images.githubusercontent.com/92494705/196887168-9d46d911-59a8-4f35-9929-b652418728cb.png)
 
-Ảnh minh hoạ
+                                          Ảnh minh hoạ
 
 Database: Mysql
 
