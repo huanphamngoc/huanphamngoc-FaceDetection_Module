@@ -1,0 +1,40 @@
+.grid-full {
+	width: 100%;
+}
+
+.grid {
+	margin: auto;
+	min-width: 1200px;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.col-lg-4 {
+	flex: 33.3333333%;
+	max-width: 33.3333333%;
+}
+
+.col-lg-6 {
+	flex: 50%;
+	max-width: 50%;
+}
+
+.col-lg-2 {
+	flex: 16.6666667%;
+	max-width: 16.6666667%;
+	padding: 0 12px;
+}
+
+.col-lg-3 {
+	flex: 25%;
+	max-width: 25%;
+	padding: 0 12px;
+}
+
+.col-lg-8 {
+	flex: 66.66666667%;
+	max-width: 66.66666667%;
+}

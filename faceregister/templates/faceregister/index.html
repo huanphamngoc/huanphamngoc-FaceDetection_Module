@@ -1,0 +1,101 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+<div id="register">
+	<div class="grid">
+		<div class="row">
+			<h1 class="title">Sign up for facial recognition service</h1>
+		</div>
+	</div>
+	<div class="grid">
+		<div class="form-wrapper row">
+			<div class="col-lg-6">
+				<form action="" method="" id="form" class="row">
+					<div class="form-group col-lg-12">
+						<input
+							type="text"
+							name="fullname"
+							id="fullname"
+							placeholder="Full name"
+						/>
+						<p class="form-message"></p>
+					</div>
+					<div class="form-group col-lg-12">
+						<input
+							type="text"
+							name="phone-number"
+							id="phone-number"
+							placeholder="Phone number"
+						/>
+						<p class="form-message"></p>
+					</div>
+					<div class="form-group col-lg-12">
+						<input
+							type="text"
+							name="student-code"
+							id="student-code"
+							placeholder="Student code"
+						/>
+						<p class="form-message"></p>
+					</div>
+					<div class="form-group col-lg-12">
+						<span class="form-group-label">Birthday</span>
+						<input type="date" id="birthday" name="birthday"
+							value="2003-01-01">
+					</div>
+					<div class="form-group-gender col-lg-12">
+						<span class="form-group-label">Gender</span>
+						<span class="gender-group">
+							<label for="male">Male</label>
+							<input
+								type="radio"
+								value="male"
+								name="gender"
+								id="male"
+							/>
+						</span>
+						<span class="gender-group">
+							<label for="female">Female</label>
+							<input
+								type="radio"
+								value="female"
+								name="gender"
+								id="female"
+							/>
+						</span>
+					</div>
+					{% comment %} <div id="camera" class="form-group-img col-lg-12">
+						<span class="form-group-label" id="camera-placeholder"
+							>Take some pictures of your face</span
+						>
+						<img 
+							srcset="{% static 'faceregister/img/image-placeholder.png' %}"
+							alt=""
+						/> 
+						<div id="overlay" class="overlay">Take some pictures</div>
+					</div> {% endcomment %}
+					{% comment %} <button type='button' name='taking-picture-btn' id='taking-picture-btn'>Taking Picture</button> {% endcomment %}
+					
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="grid">
+		<div class="policy-wrapper row">
+			<div class="col-lg-6">
+				<p class="policy">
+					By clicking sign up, you agree to our
+					<span class="policy--primary">Terms</span> and
+					<span class="policy--primary">Policy</span>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="grid">
+		<div class="row">
+			<button id="signup">Sign up</button>
+		</div>
+	</div>
+</div>
+<script src="{% static 'faceregister/js/validate.js' %}"></script>
+<script src="{% static 'faceregister/js/signup.js' %}"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+{% endblock content %}

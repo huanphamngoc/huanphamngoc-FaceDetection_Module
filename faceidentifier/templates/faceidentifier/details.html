@@ -1,0 +1,60 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+<!-- Trigger/Open The Modal -->
+<div class="thong_tin">
+  <table>
+    <tr>
+      <td><label id="lopLabel" for="IDLop">Chọn lớp:</label></td>
+      <td>
+        <div class="lop1">
+          <select name="IDLop" id="IDLop">
+          <option value="01">LT1</option>
+        </div>
+        
+      </select></td>
+    </tr>
+    <tr>
+      <td><div class="ten">Tên Lớp: </div></td>
+      <td><div class="ten">Công nghệ thông tin</div></td>
+    </tr>
+    <tr>
+      <td><div class="thanhvien">Sĩ số: </div></td>
+      <td><div class="thanhvien">20</div></td>
+    </tr>
+  </table>
+  <div class="lop">
+    
+    
+  </div>
+  
+  
+  <button id="myBtn">Định danh tự động</button>
+  <button class="Ddtc">Định danh thủ công</button>
+</div>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-content1">
+      <div class="noti-percent">
+        <div class="noti_index" style="font-size: 20px;" ></div>
+      </div>
+      <div class = "noti-green">
+        <div class="fas fa-check-circle"></div>
+        <div class = "hello"></div>
+        {% comment %} <button class="" >ab</button> {% endcomment %}
+      </div>
+      <div class = "noti-red">
+        <div class="fas fa-times-circle"></div>
+        <div class="noti-alert">Định danh thất bại</div>
+      </div>
+      <div class="close ">
+          <span class="fas fa-times" ></span>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script defer src="{% static 'faceidentifier/js/face-api.min.js' %}"></script>
+<script defer src="{% static 'faceidentifier/js/faceidentifier.js' %}"></script>
+</script>
+{% endblock content %}

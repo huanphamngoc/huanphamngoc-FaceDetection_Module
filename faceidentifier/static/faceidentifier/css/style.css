@@ -1,0 +1,49 @@
+h1 {
+  color: red;
+}
+
+h2 {
+  color: blue;
+}
+
+#lopLabel,.ten,.thanhvien {
+  color: #333;
+  font-size: 20px;
+  font-weight: 500;
+  margin-right: 12px;
+  line-height: 40px;
+}
+
+.thong_tin {
+  display: flex;
+  margin-top: 24px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.Ddtc,
+#myBtn {
+  width: 300px;
+  font-size: 20px;
+  font-weight: 600;
+  height: 60px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+#myBtn:hover{
+  background-color: rgb(255, 255, 255);
+  color: black;
+}
+.Ddtc:hover{
+  background-color: rgb(80, 78, 78);
+}
+#IDLop {
+  width: 100px;
+  outline: none;
+  height: 40px;
+  font-size: 14px;
+}
+
+/*# sourceMappingURL=style.css.map */

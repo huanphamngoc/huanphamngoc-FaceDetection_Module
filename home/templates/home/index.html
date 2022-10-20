@@ -1,0 +1,158 @@
+{% extends 'base.html' %} {% block content %} {% load static %} {% comment %}
+Service {% endcomment %}
+<div id="service">
+	<div class="grid">
+		<div class="service-item-container">
+			<div class="service-item">
+				<div class="service-item__img">
+					<img src="{% static 'home/img/Face ID.gif' %}" class='image_home' alt="" />
+				</div>
+				<p class="service-item__title">
+				</p>
+				<a href="/faceregister/registerImage" class="service-item__btn">Đăng ký khuôn mặt</a>
+			</div>
+			<div class="service-item">
+				<div class="service-item__img">
+					<img src="{% static 'home/img/mind-512.png' %}" class='image_home' alt="" />
+				</div>
+				<p class="service-item__title">
+					
+				</p>
+				<button id='training-url' class="service-item__btn">Huấn luyện</button>
+			</div>
+			<div class="service-item">
+				<div class="service-item__img">
+					<img src="{% static 'home/img/faceidentifier.JPG' %}" class='image_home' alt="service" />
+				</div>
+				<p class="service-item__title">
+					
+				</p>
+				<a id="face-identification" href="{% url 'faceidentifier:scanner' %}" class="service-item__btn">Định danh khuôn mặt</a>
+			</div>
+		</div>
+	</div>
+</div>
+{% comment %} End service {% endcomment %} {% comment %} About {% endcomment %}
+<div class="about" id="about">
+	<div class="grid">
+		<div class="about-container row">
+			<h2 class="about__title">ag team</h2>
+			<p class="about__slogan">Make the future</p>
+			<p class="about__des">
+				We have created a fictional band website. Lorem ipsum dolor sit
+				amet, consectetur adipiscing elit, sed do eiusmod tempor
+				incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+				veniam, quis nostrud exercitation ullamco laboris nisi ut
+				aliquip ex ea commodo consequat.
+			</p>
+			<div class="about__member">
+				<div class="about__member-item">
+					<img
+						src="{% static 'home/img/code.jpg' %}"
+						alt="member"
+						class="item__img"
+					/>
+					<span class="item__name">Phi Trung Hieu</span>
+				</div>
+				<div class="about__member-item">
+					<img
+						src="{% static 'home/img/code.jpg' %}"
+						alt="member"
+						class="item__img"
+					/>
+					<span class="item__name">Pham Ngoc Huan</span>
+				</div>
+				<div class="about__member-item">
+					<img
+						src="{% static 'home/img/code.jpg' %}"
+						alt="member"
+						class="item__img"
+					/>
+					<span class="item__name">Nguyen Luong Bang</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% comment %} End about {% endcomment %} {% comment %} Contact {% endcomment %}
+<div id="contact">
+	<div class="grid">
+		<div class="contact-container row">
+			<h2 class="contact__title">Liên hệ</h2>
+			<p class="contact__subtitle">Liên hệ với chung tôi. Để lại lời nhắn của bạn</p>
+			<div class="contact__content">
+				<div class="contact__content--info">
+					<div class="info-item">
+						<img
+							srcset="{% static 'home/img/phone-call.png' %} 2x"
+							alt="icon"
+							class="info-item__icon"
+						/>
+						<p class="info-item__content">
+							Số điện thoại: 0123456789
+						</p>
+					</div>
+					<div class="info-item">
+						<img
+							srcset="{% static 'home/img/email.png' %} 2x"
+							alt="icon"
+							class="info-item__icon"
+						/>
+						<p class="info-item__content">
+							Email: agteam@gmail.com
+						</p>
+					</div>
+				</div>
+				<form
+					class="contact__content--form"
+					id="contact-form"
+					action=""
+				>
+					<input
+						type="text"
+						name="name"
+						placeholder="Tên"
+						class="contact-input"
+					/>
+					<input
+						type="email"
+						name="email"
+						placeholder="Email"
+						class="contact-input"
+					/>
+					<textarea
+						name="message"
+						placeholder="Lời nhắn"
+						id="message"
+						class="contact-input"
+					></textarea>
+					<button class="contact-btn">Gửi</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal" id="myModal" >
+	<div class="dangxuly">
+		<div class="gifout"><img src="{% static 'home/img/Blue-spin.gif' %}" alt="" class="gif"></div>
+		<div class="text">Đang Xử Lý</div>
+	</div>
+</div>
+<div class="alert-green hide">
+	<span class="fas fa-check-circle"></span>
+	<span class="msg">Succeed!</span>
+	<div class="close-btn-green">
+		<span class="fas fa-times"></span>
+	</div>
+</div>
+
+<div class="alert-red hide">
+	<span class="fas fa-times-circle"></span>
+	<span class="msg">Failed!</span>
+	<div class="close-btn-red">
+		<span class="fas fa-times"></span>
+	</div>
+</div>
+<script src="{% static 'home/js/home.js' %}"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+{% comment %} End Contact {% endcomment %} {% endblock content %}

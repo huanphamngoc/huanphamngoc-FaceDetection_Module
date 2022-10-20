@@ -1,0 +1,9 @@
+.env
+__pycache__/
+faceidentifier/__pycache__
+faceregister/__pycache__
+home/__pycache__
+signin/__pycache__
+FaceRecognitionDemo/__pycache__
+face_recognition_data
+Dataset/

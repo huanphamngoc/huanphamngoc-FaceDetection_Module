@@ -1,0 +1,2 @@
+class DinhDanhKhuonMatException(Exception):
+    pass
