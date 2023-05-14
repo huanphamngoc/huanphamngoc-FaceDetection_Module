@@ -1,11 +1,12 @@
 import os
 import numpy as np
 import pickle
-
+from PIL import Image
 from django.conf import settings
 
 from faceregister.models import AnhDangKy, ChiTietLopHoc
 from FaceRecognitionDemo.firebase import Firebase
+
 
 class DatasetManagement():
     '''Lớp cung cấp các phương thức thao tác với face dataset'''
@@ -26,11 +27,22 @@ class DatasetManagement():
         firebase = Firebase(settings.FIREBASE_CONFIGURE)
 
         #Khởi tạo các danh sách lưu thông tin cần thiết
+        # dataset = pickle.load(open('D:\my_project\Awesome-Guys\Dataset\LT1\LT1_ImageDataset.pkl','rb'))
+        
+        # print(dataset.keys())
+        # images = dataset['images']
+        # labels = dataset['classes']
+        # class_names = dataset['student_names']
+        
+        # student_images_list = list(dataset['images'])
+        # student_labels_list = list(dataset['classes'])
+        # student_names_list = list(dataset['student_names'])
+        # student_ids_list = list(dataset['student_ids'])
+        
         student_images_list = list()
         student_labels_list = list()
         student_names_list = list()
-        student_ids_list = list()
-
+        student_ids_list = list()   
         #Lấy tất cả sinh viên có trong lớp 'LT1'
         classes_details = ChiTietLopHoc.objects.filter(lop_hoc__ma_lop='LT1')
         print(classes_details)
@@ -46,9 +58,13 @@ class DatasetManagement():
             student_ids_list.append(detail.sinh_vien.masv)
 
             #Duyệt từng ảnh đã đăng ký của sinh viên
+            i = 0
             for image_infor in registration_images:
                 #Đọc ảnh từ Firebase
                 image = firebase.read_an_image_from_storage(image_infor.duong_dan_anh)
+                # im = Image.fromarray(image[:120, 30:110])
+                # im.save( "./image/image"+str(i) +".jpeg")
+                # i+=1
                 
                 #Lưu ảnh và nhãn của sinh viên
                 student_images_list.append(image[:120, 30:110])

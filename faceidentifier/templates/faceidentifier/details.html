@@ -1,4 +1,10 @@
 {% extends 'base.html' %} {% block content %} {% load static %}
+<!-- <header>
+  <link rel="stylesheet" href="{% static 'faceidentifier/css/pyscript.css' %}" />
+  <script defer src="{% static 'faceidentifier/js/pyscript.js' %}" ></script>
+  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+  <script defer onload="console.log(`${pyscript.version}`)" src="https://pyscript.net/latest/pyscript.js"></script>
+</header> -->
 <!-- Trigger/Open The Modal -->
 <div class="thong_tin">
   <table>
@@ -53,8 +59,12 @@
 
   </div>
 </div>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<py-script > 
+  <!-- import os
+  print("hello world") -->
+</py-script>|
+<script src="{% static 'faceidentifier/js/axios.min.js' %}"></script>
 <script defer src="{% static 'faceidentifier/js/face-api.min.js' %}"></script>
 <script defer src="{% static 'faceidentifier/js/faceidentifier.js' %}"></script>
-</script>
+
 {% endblock content %}

@@ -95,6 +95,44 @@
 		</div>
 	</div>
 </div>
+
+<div class="alert-green hide">
+	<span class="fas fa-check-circle"></span>
+	<span class="msg">Succeed!</span>
+	<div class="close-btn-green">
+		<span class="fas fa-times"></span>
+	</div>
+</div>
+
+<div class="alert-red hide">
+	<span class="fas fa-times-circle"></span>
+	<span class="msg">Failed!</span>
+	<div class="close-btn-red">
+		<span class="fas fa-times"></span>
+	</div>
+</div>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+	<div class="modal-content">
+	  <div class="modal-content1">
+		<div class="noti-percent">
+		  <div class="noti_index" style="font-size: 20px;" ></div>
+		</div>
+		<div class = "noti-green">
+		  <div class="fas fa-check-circle"></div>
+		  <div class = "hello"></div>
+		</div>
+		<div class = "noti-red">
+		  <div class="fas fa-times-circle"></div>
+		  <div class="noti-alert">Định danh thất bại</div>
+		</div>
+		<div class="close ">
+			<span class="fas fa-times" ></span>
+		</div>
+	  </div>
+  
+	</div>
+  </div>
 <script src="{% static 'faceregister/js/validate.js' %}"></script>
 <script src="{% static 'faceregister/js/signup.js' %}"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

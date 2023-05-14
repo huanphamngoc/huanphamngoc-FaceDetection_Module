@@ -1,7 +1,8 @@
 import pickle
-
+import numpy as np
 from django.conf import settings
 from django.shortcuts import render
+from sklearn.model_selection import cross_validate
 
 from rest_framework import  status
 from rest_framework.views import APIView
@@ -15,6 +16,7 @@ from .transfer_learning import TransferLearning_CNN_SVM
 from keras.preprocessing.image import ImageDataGenerator
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
+from sklearn.model_selection import StratifiedKFold
 
 
 
@@ -38,9 +40,9 @@ class ModelsTrainingAPI(APIView):
 			dataset_management = DatasetManagement(directory) 
 
 			#Tạo dataset
-			# dataset = dataset_management.create_face_dataset()
+			dataset = dataset_management.create_face_dataset()
 			
-			dataset = pickle.load(open('D:\my_project\Awesome-Guys\Dataset\LT1\LT1_ImageDataset.pkl','rb'))
+			# dataset = pickle.load(open('D:\my_project\Awesome-Guys\Dataset\LT1\LT1_ImageDataset.pkl','rb'))
 
 			print(dataset.keys())
 			images = dataset['images']
@@ -70,7 +72,7 @@ class ModelsTrainingAPI(APIView):
 			# shear_range = 3.5,
 			# featurewise_center=True, featurewise_std_normalization=True,	zca_whitening=True
 			)
-			callback = tf.keras.callbacks.EarlyStopping(monitor='loss', patience = 5, min_delta=0, mode = 'min',restore_best_weights=True)
+			callback = tf.keras.callbacks.EarlyStopping(monitor='loss', patience = 4, min_delta=0, mode = 'min',restore_best_weights=True)
 			cnn_model = tf.keras.models.load_model(f'D:\my_project\Awesome-Guys\Dataset\LT1\LT1_CNN_Model.pkl')
 			#Huấn luyện mô hình CNN
 			trainingDataSet, testingDataSet, trainingLabel, testingLabel = train_test_split(dataset['images'], dataset['classes'], test_size=0.3, random_state=42)
@@ -78,12 +80,11 @@ class ModelsTrainingAPI(APIView):
 			print(trainingLabel.shape)
 			print(testingDataSet.shape)
 			print(testingLabel.shape)
-			
    
-			# history = cnn_model.fit(datagen.flow(trainingDataSet,trainingLabel, batch_size=32),validation_data=(testingDataSet,testingLabel),
-			# 					batch_size=16, epochs=150, verbose=1)
+			history = cnn_model.fit(datagen.flow(trainingDataSet,trainingLabel, batch_size=32),validation_data=(testingDataSet,testingLabel),
+								batch_size=16, epochs=100, verbose=1, callbacks = [callback])
 			# history = cnn_model.fit( trainingDataSet,trainingLabel,validation_data=(testingDataSet,testingLabel),
-			# 					batch_size=16, epochs=7, verbose=1)
+			# 					batch_size=16, epochs=7, verbose=1, callbacks = [callback])
 			# Testing callbacks = [callback], datagen.flow(dataset['images'], dataset['classes'], batch_size=32)
 			print(cnn_model.metrics_names)
 			# Đánh giá model với dữ liệu train
@@ -96,9 +97,35 @@ class ModelsTrainingAPI(APIView):
 			
 			#Trích xuất thuộc tính từ ảnh
 			feature_matrix = tfl.cnn_extract_feature(dataset['images'])
+			# KFold = StratifiedKFold(n_splits=5, random_state=42, shuffle=True)
 
 			#Tạo và huấn luyện mô hình SVM
-			clf = svm.SVC(kernel = 'rbf', probability=True, C = 10).fit(feature_matrix, dataset['classes'])
+			
+
+			clf = svm.SVC(kernel='rbf', C = 10, gamma=0.0001)
+			# clf = svm.SVC(kernel='rbf')
+
+			# KFold = StratifiedKFold(n_splits=5, random_state=42, shuffle=True)
+
+			# scores = cross_validate(clf, feature_matrix, dataset['classes'], cv=KFold, scoring='accuracy', return_estimator=True, return_train_score=True)
+
+			# fit_times = scores['fit_time']
+			# score_times = scores['score_time']
+			# estimators = scores['estimator']
+			# train_scores = scores['train_score'] * 100
+			# test_scores = scores['test_score'] * 100
+
+			# print('{:14s} {:20s} {:20s} {:15s} {:15s}'.format('', 'Training scores', 'Testing scores', 'Fit time', 'Score time'))
+
+			# for i in range(5):
+			# 	print('{:13s} {:10.2f}{:<} {:18.2f}{:<} {:17.2f} {:16.2f}'.format('Experiment ' + str(i + 1) + ':', train_scores[i], '%', test_scores[i], '%', fit_times[i], score_times[i]))
+
+			# print('------------------------------------------------------------------------------------------')
+			# print('{:>14s} {:9.2f}% {:18.2f}% {:17.2f} {:16.2f}'.format('Mean: ', np.mean(train_scores), np.mean(test_scores), np.mean(fit_times), np.mean(score_times)))
+			# print('{:>14s} {:9.2f}% {:18.2f}% {:17.2f} {:16.2f}'.format('Highest: ', max(train_scores), max(test_scores), max(fit_times), max(score_times)))
+			# print('{:>14s} {:9.2f}% {:18.2f}% {:17.2f} {:16.2f}'.format('Lowest: ', min(train_scores), min(test_scores), min(fit_times), min(score_times)))
+
+			clf = svm.SVC(kernel = 'rbf', probability=True, C = 10, gamma=0.0001).fit(feature_matrix, dataset['classes'])
 
 			#Test mô hình
 			y_pred = clf.predict(feature_matrix)

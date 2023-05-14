@@ -6,7 +6,7 @@ from django.conf import settings
 from django.shortcuts import render
 import io
 from PIL import Image
-import keras
+# import keras
 from rest_framework import  status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -69,7 +69,7 @@ class FaceidentifiterAPI(APIView):
         print(prob)
         print(image_links)
         print(student_name)
-        if prob > 0.3 :
+        if prob > 0.1 :
             # chitiet = 
             # print((ChiTietLopHoc.objects.get(sinh_vien = student_id, lop_hoc = 'LT1')).id)
             data_dinhdankhuonmat = {

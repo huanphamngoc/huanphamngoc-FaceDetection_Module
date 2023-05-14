@@ -32,5 +32,6 @@ class Firebase():
     def read_an_image_from_storage(self, url):
         file = urllib.request.urlopen(url).read()
         image = Image.open(io.BytesIO(file)) #RGB
+        
         return np.array(image)
 

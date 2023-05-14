@@ -91,7 +91,7 @@ class SaveFrontalFace(APIView):
         folder_path = f'demo_faceregister/{masv}'
         firebase = Firebase(settings.FIREBASE_CONFIGURE)
         face_dataset = dict()
-        dataset = pickle.load(open('D:\my_project\Awesome-Guys\Dataset\LT1\LT1_ImageDataset.pkl','rb'))
+        dataset = pickle.load(open(f'{directory}/{classes}_ImageDataset.pkl', 'rb'))
         print(dataset.keys())
         images = dataset['images']
         labels = dataset['classes']
@@ -146,9 +146,9 @@ class SaveFrontalFace(APIView):
                 print(labels)
                 # print(dataset)
         #Ghi dữ liệu xuống đĩa
-                pickle.dump(dataset, open(f'{directory}/{classes}_ImageDataset.pkl', 'wb'))
-                pickle.dump(student_names_list, open(f'{directory}/{classes}_StudentNames.pkl', 'wb'))
-                pickle.dump(student_ids_list, open(f'{directory}/{classes}_StudentIDs.pkl', 'wb'))
+                # pickle.dump(dataset, open(f'{directory}/{classes}_ImageDataset.pkl', 'wb'))
+                # pickle.dump(student_names_list, open(f'{directory}/{classes}_StudentNames.pkl', 'wb'))
+                # pickle.dump(student_ids_list, open(f'{directory}/{classes}_StudentIDs.pkl', 'wb'))
                 if anhdangky_serializer.is_valid():
                     anhdangky_serializer.save()
                     return Response(anhdangky_serializer.data, status=status.HTTP_201_CREATED)

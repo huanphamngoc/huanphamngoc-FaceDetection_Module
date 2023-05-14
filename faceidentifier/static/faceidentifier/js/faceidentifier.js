@@ -200,3 +200,13 @@ btn.onclick = function () {
     }
   };
 };
+
+// function logFromPython(){
+//   pyscript.interpreter.interface.runPython(`
+//       animal = "Python"
+//       sound = "sss"
+//       console.warn(f"{animal}s go " + sound * 5)
+//   `)
+// }
+
+// logFromPython
