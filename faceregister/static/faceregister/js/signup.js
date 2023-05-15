@@ -79,6 +79,7 @@ signupBtn.onclick = () => {
     });
     
       callSignUpAPI(data)
+      
 }
 
 

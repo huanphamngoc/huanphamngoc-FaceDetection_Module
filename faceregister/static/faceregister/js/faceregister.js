@@ -156,6 +156,9 @@ btn.onclick = function () {
       canvas.height = "140";
       let ctx = canvas.getContext("2d");
       ctx.drawImage(cnv, 0, 0, canvas.width, canvas.height);
+      canvas.toBlob(function(blob) {
+        saveAs(blob, "image.png");
+    });
       dataconvert.push(
         canvas
           .toDataURL("image/jpeg", 1.0)
