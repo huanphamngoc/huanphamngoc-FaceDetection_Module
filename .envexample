@@ -1,0 +1,18 @@
+DEBUG = 1
+ALLOWED_HOST = 127.0.0.1
+DB_NAME = DB1
+DB_USER = root
+PASSWORD = S2huan2k12s@
+HOST = localhost
+PORT = 3306
+
+FIREBASE_CONFIGURE = '{
+      "apiKey": "AIzaSyAnxR0khiEU_pTYojc1f_9AlmEnE9sg5D4",
+      "authDomain": "fir-prj-51e7b.firebaseapp.com",
+      "databaseURL": "https://fir-prj-51e7b-default-rtdb.firebaseio.com",
+      "projectId": "fir-prj-51e7b",
+      "storageBucket": "fir-prj-51e7b.appspot.com",
+      "messagingSenderId": "646723771777",
+      "appId": "1:646723771777:web:d126b73ea1614e393e1c80",
+      "measurementId": "G-5WQ25ZNRK2"
+}'
