@@ -40,9 +40,9 @@ class ModelsTrainingAPI(APIView):
 			dataset_management = DatasetManagement(directory) 
 
 			#Tạo dataset
-			dataset = dataset_management.create_face_dataset()
+			# dataset = dataset_management.create_face_dataset()
 			
-			# dataset = pickle.load(open('D:\my_project\Awesome-Guys\Dataset\LT1\LT1_ImageDataset.pkl','rb'))
+			dataset = pickle.load(open(f'{directory}/{classes}_ImageDataset.pkl', 'rb'))
 
 			print(dataset.keys())
 			images = dataset['images']

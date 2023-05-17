@@ -22,7 +22,7 @@ from django.shortcuts import render
 import io
 from PIL import Image
 from django.db.models import Count
-from .models import ChiTietLopHoc, SinhVien
+from .models import ChiTietLopHoc, SinhVien, AnhDangKy
 import pickle
 # Create your views here.
 class FaceRegisterAPIView(APIView):
@@ -104,30 +104,45 @@ class SaveFrontalFace(APIView):
         print(labels)
         images1 = images.tolist()
         labels = labels.tolist()
-        nhan = len(class_names)
+        nhan = Student_ids.index(masv)
         # ChiTietLopHoc.objects.values('id').count()-1
         # print(a.count())
+        print(nhan)
+        print((labels[10]))
+        print(type(nhan))
         masv1 = masv
         Student_ids.append(masv)
         class_names.append(SinhVien.objects.get(masv = masv1).ho_ten)
         # b = SinhVien.objects.get(masv = masv1).ho_ten
-        # print(b)
+        # print(b)  
+        
+        templabels = []      
+        tempimages = []
+        for i in range(len(labels)):
+            if(labels[i] != nhan):
+                templabels.append(labels[i])
+                tempimages.append(images[i])
+        images = tempimages
+        labels = templabels
+        print(labels)
         try:
             with transaction.atomic():
                 for index, link in enumerate(duong_dan_anh):
                     # timedt = datetime.datetime.now()
                     # print(f'{masv}_{timedt}.jpg')
-                    
-                    duong_dan_anh1 = (np.array(Image.open(io.BytesIO((base64.b64decode(link))))))[:120, 30:110]
-                    images1.append(duong_dan_anh1)
+                    duong_dan_anh_temp = (np.array(Image.open(io.BytesIO((base64.b64decode(link))))))[:120, 30:110]
+                    images.append(duong_dan_anh_temp)
                     labels.append(nhan)
+                    # duong_dan_anh2 = ((Image.open(io.BytesIO((base64.b64decode(link))))))
+
+                    # duong_dan_anh2.save("/save/image"+str(index)+".jpg")
                     face_dataset[f'{masv}_{index}.jpg'] = base64.b64decode(link)
                     # image = (np.array(Image.open(io.BytesIO((base64.b64decode(link))))))[:, 20:100]
                     # face_dataset[f'{masv}_{index}.jpg'] = cv2.imencode('.jpg', cv2.cvtColor(image , cv2.COLOR_RGB2BGR))[1].tobytes()
                     # face_dataset[f'{masv}_{timedt}.jpg'] = cv2.imencode('.jpg', cv2.cvtColor(image , cv2.COLOR_RGB2BGR))[1].tobytes()
                 image_links = firebase.upload_images_to_storage(folder_path, face_dataset, masv)
                 anhdangky_serializer = AnhDangKySerializer(data=image_links, many=True)
-                student_images_list = images1
+                student_images_list = images
                 student_labels_list = labels
                 student_ids_list = Student_ids
                 student_names_list = class_names
@@ -146,11 +161,13 @@ class SaveFrontalFace(APIView):
                 print(labels)
                 # print(dataset)
         #Ghi dữ liệu xuống đĩa
-                # pickle.dump(dataset, open(f'{directory}/{classes}_ImageDataset.pkl', 'wb'))
-                # pickle.dump(student_names_list, open(f'{directory}/{classes}_StudentNames.pkl', 'wb'))
-                # pickle.dump(student_ids_list, open(f'{directory}/{classes}_StudentIDs.pkl', 'wb'))
+                pickle.dump(dataset, open(f'{directory}/{classes}_ImageDataset.pkl', 'wb'))
+                pickle.dump(student_names_list, open(f'{directory}/{classes}_StudentNames.pkl', 'wb'))
+                pickle.dump(student_ids_list, open(f'{directory}/{classes}_StudentIDs.pkl', 'wb'))
                 if anhdangky_serializer.is_valid():
-                    anhdangky_serializer.save()
+                    anh = AnhDangKy.objects.filter(sinh_vien_id = masv);
+                    # anh.delete()
+                    # anhdangky_serializer.save()
                     return Response(anhdangky_serializer.data, status=status.HTTP_201_CREATED)
                 else:
                     raise AnhDangKyException(anhdangky_serializer.errors, stautus = status.HTTP_400_BAD_REQUEST)
@@ -159,6 +176,7 @@ class SaveFrontalFace(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
         
 
+        
         
 # class SaveFrontalFace(APIView):
 #     template_name = 'faceregister/index.html'

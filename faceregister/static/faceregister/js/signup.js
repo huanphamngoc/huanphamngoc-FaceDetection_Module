@@ -3,7 +3,7 @@ const modal = document.getElementById("myModal");
 const modalcontent = document.querySelector(".modal-content1");
 const noti_percent = document.querySelector(".noti-percent");
 const noti_alert = document.querySelector(".noti-alert");
-console.log("signup");
+console.log("hello");
 //thông báo
 function Alertgreen() {
   console.log("hell")
